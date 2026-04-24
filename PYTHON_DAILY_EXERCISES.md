@@ -1,25 +1,25 @@
 # Python Daily Exercises - Làm Vua Hàng Ngày
 
-## Mô tiff
-File này chúa các bài tap Python theo trend tu co ban nang cao, giúp ban luyen tap suy luan và giai quyêt vân dê thuc tê. Môi bài tap có gii y và lôi giai.
+## Mô tả
+File này chứa các bài tập Python theo trend từ cơ bản đến nâng cao, giúp bạn luyện tập suy luận và giải quyết vấn đề thực tế. Mỗi bài tập có gợi ý và lời giải.
 
 ---
 
-## Week 1: Python C Ban (Days 1-7)
+## Week 1: Python Cơ Bản (Days 1-7)
 
 ### Day 1: Variables và Data Types
 
-#### Bài tap 1.1: Machine Status Checker
-**Mô tiff:** Viêt function kiêm tra trang thái máy theo công suât.
+#### Bài tập 1.1: Machine Status Checker
+**Mô tả:** Viết function kiểm tra trạng thái máy theo công suất.
 ```python
 def check_machine_status(power_usage):
     """
-    Kiêm tra traang thái máy dda trên công suât tiêu thû:
+    Kiểm tra trạng thái máy dựa trên công suất tiêu thụ:
     - < 50W: "Idle"
     - 50-200W: "Running" 
     - > 200W: "Overload"
     """
-    # Code cûa ban o dây
+    # Code của bạn ở đây
     pass
 
 # Test cases
@@ -28,11 +28,11 @@ print(check_machine_status(150))   # Expected: "Running"
 print(check_machine_status(250))   # Expected: "Overload"
 ```
 
-**Gii y:**
-- Sû dûng if-elif-else
-- Nhu vân dê vê comparison operators
+**Gợi ý:**
+- Sử dụng if-elif-else
+- Nhớ vấn đề về comparison operators
 
-**Lôi giai:**
+**Lời giải:**
 ```python
 def check_machine_status(power_usage):
     if power_usage < 50:
@@ -43,12 +43,12 @@ def check_machine_status(power_usage):
         return "Overload"
 ```
 
-#### Bài tap 1.2: Temperature Converter
-**Mô tiff:** Viêt function chuyên dôi nhiêt dô sang Fahrenheit.
+#### Bài tập 1.2: Temperature Converter
+**Mô tả:** Viết function chuyển đổi nhiệt độ sang Fahrenheit.
 ```python
 def celsius_to_fahrenheit(celsius):
     """
-    Chuyên dôi Celsius sang Fahrenheit.
+    Chuyển đổi Celsius sang Fahrenheit.
     Formula: F = (C × 9/5) + 32
     """
     pass
@@ -62,12 +62,12 @@ print(celsius_to_fahrenheit(100))  # Expected: 212.0
 
 ### Day 2: Lists và Loops
 
-#### Bài tap 2.1: Production Line Monitor
-**Mô tiff:** Quân lý danh sách các máy trong dây chuyên sàn xuât.
+#### Bài tập 2.1: Production Line Monitor
+**Mô tả:** Quản lý danh sách các máy trong dây chuyền sản xuất.
 ```python
 def get_active_machines(machines):
     """
-    Lây danh sách các máy dang hoat dông (status = "running")
+    Lấy danh sách các máy đang hoạt động (status = "running")
     machines: list of {"name": str, "status": str, "power": int}
     """
     pass
@@ -82,16 +82,16 @@ print(get_active_machines(machines))
 # Expected: ["Machine A", "Machine C"]
 ```
 
-**Gii y:**
-- Sû dung for loop
-- Kiêm tra condition trong loop
+**Gợi ý:**
+- Sử dụng for loop
+- Kiểm tra condition trong loop
 
-#### Bài tap 2.2: Power Consumption Calculator
-**Mô tiff:** Tính công suât tiêu thû tông.
+#### Bài tập 2.2: Power Consumption Calculator
+**Mô tả:** Tính công suất tiêu thụ tổng.
 ```python
 def calculate_total_power(machines):
     """
-    Tính công suât tiêu thû cûa tât ca các máy
+    Tính công suất tiêu thụ của tất cả các máy
     """
     pass
 
@@ -102,12 +102,12 @@ print(calculate_total_power(machines))  # Expected: 330
 
 ### Day 3: Dictionaries và Functions
 
-#### Bài tap 3.1: Machine Data Manager
-**Mô tiff:** Quân lý thông tin máy bâng dictionary.
+#### Bài tập 3.1: Machine Data Manager
+**Mô tả:** Quản lý thông tin máy bằng dictionary.
 ```python
 def update_machine_status(machines, machine_name, new_status):
     """
-    Câp nhât traang thái máy và trâ vê thông tin mõi
+    Cập nhật trạng thái máy và trả về thông tin mới
     """
     pass
 
@@ -125,12 +125,12 @@ print(result)
 
 ### Day 4: String Manipulation
 
-#### Bài tap 4.1: Production Code Generator
-**Mô tiff:** Tao mã sàn xuât theo format.
+#### Bài tập 4.1: Production Code Generator
+**Mô tả:** Tạo mã sản xuất theo format.
 ```python
 def generate_production_code(date, line, product):
     """
-    Tao mã sàn xuât: PROD-DDMMYY-LINE-PRODUCT
+    Tạo mã sản xuất: PROD-DDMMYY-LINE-PRODUCT
     date: "DD/MM/YYYY"
     line: "A", "B", "C"
     product: "TYPE1", "TYPE2"
@@ -145,12 +145,12 @@ print(generate_production_code("15/04/2026", "A", "TYPE1"))
 
 ### Day 5: Error Handling
 
-#### Bài tap 5.1: Safe Division
-**Mô tiff:** Xû lý chia sô an toàn.
+#### Bài tập 5.1: Safe Division
+**Mô tả:** Xử lý chia số an toàn.
 ```python
 def safe_divide(a, b):
     """
-    Chia an toàn, tra vê error message nêu chia cho 0
+    Chia an toàn, trả về error message nếu chia cho 0
     """
     pass
 
@@ -162,8 +162,8 @@ print(safe_divide(10, 0))    # Expected: "Error: Cannot divide by zero"
 
 ### Day 6: File I/O
 
-#### Bài tap 6.1: Log Manager
-**Mô tiff:** Ghi log ra file.
+#### Bài tập 6.1: Log Manager
+**Mô tả:** Ghi log ra file.
 ```python
 def write_machine_log(machine_name, status, timestamp):
     """
@@ -181,12 +181,12 @@ write_machine_log("Machine A", "running", "2026-04-15 10:30:00")
 
 ### Day 7: List Comprehensions
 
-#### Bài tap 7.1: Filter Machines
-**Mô tiff:** Lây các máy có công suât > 100W.
+#### Bài tập 7.1: Filter Machines
+**Mô tả:** Lấy các máy có công suất > 100W.
 ```python
 def get_high_power_machines(machines):
     """
-    Sû dung list comprehension
+    Sử dụng list comprehension
     """
     pass
 
@@ -206,24 +206,24 @@ print(get_high_power_machines(machines))
 
 ### Day 8: Classes và Objects
 
-#### Bài tap 8.1: Machine Class
-**Mô tiff:** Tao class Machine.
+#### Bài tập 8.1: Machine Class
+**Mô tả:** Tạo class Machine.
 ```python
 class Machine:
     def __init__(self, name, machine_type):
-        # Khôi tao
+        # Khởi tạo
         pass
     
     def start(self):
-        # Bât máy
+        # Bật máy
         pass
     
     def stop(self):
-        # Tât máy
+        # Tắt máy
         pass
     
     def get_status(self):
-        # Lây traang thái
+        # Lấy trạng thái
         pass
 
 # Test
@@ -236,16 +236,16 @@ print(machine.get_status())  # Expected: "running"
 
 ### Day 9: Inheritance
 
-#### Bài tap 9.1: Specialized Machines
-**Mô tiff:** Tao class chuyên biêt.
+#### Bài tập 9.1: Specialized Machines
+**Mô tả:** Tạo class chuyên biệt.
 ```python
 class CNCMachine(Machine):
     def __init__(self, name, spindle_speed):
-        # Khôi tao
+        # Khởi tạo
         pass
     
     def set_spindle_speed(self, speed):
-        # Dat tôc dô dao
+        # Đặt tốc độ dao
         pass
 
 # Test
@@ -259,8 +259,8 @@ print(cnc.get_status())  # Expected: "running at 1500 RPM"
 
 ### Day 10: Encapsulation
 
-#### Bài tap 10.1: Private Data
-**Mô tiff:** Bao vê dã liêu private.
+#### Bài tập 10.1: Private Data
+**Mô tả:** Bảo vệ dữ liệu private.
 ```python
 class ProductionLine:
     def __init__(self, name):
@@ -268,11 +268,11 @@ class ProductionLine:
         self.name = name
     
     def increment_production(self):
-        # Tang sô luông sàn xuât
+        # Tăng số lượng sản xuất
         pass
     
     def get_production_count(self):
-        # Lây sô luông sàn xuât (read-only)
+        # Lấy số lượng sản xuất (read-only)
         pass
 
 # Test
@@ -285,8 +285,8 @@ print(line.get_production_count())  # Expected: 1
 
 ### Day 11: Polymorphism
 
-#### Bài tap 11.1: Different Machine Types
-**Mô tiff:** Các máy khác nhau có hành vi khác nhau.
+#### Bài tập 11.1: Different Machine Types
+**Mô tả:** Các máy khác nhau có hành vi khác nhau.
 ```python
 class Machine:
     def get_info(self):
@@ -314,17 +314,17 @@ print_machine_info(conveyor)   # Expected: "Conveyor - Speed: 2 m/s"
 
 ### Day 12: Decorators
 
-#### Bài tap 12.1: Performance Monitor
-**Mô tiff:** Decorator dô performance.
+#### Bài tập 12.1: Performance Monitor
+**Mô tả:** Decorator đo performance.
 ```python
 import time
 
 def performance_monitor(func):
     def wrapper(*args, **kwargs):
-        # Thôi gian bat dâu
+        # Thời gian bắt đầu
         start = time.time()
         result = func(*args, **kwargs)
-        # Thôi gian kêt thúc
+        # Thời gian kết thúc
         end = time.time()
         print(f"{func.__name__} took {end - start:.4f} seconds")
         return result
@@ -343,12 +343,12 @@ print(process_data([1, 2, 3, 4, 5]))  # Expected: 5 + time message
 
 ### Day 13: Generators
 
-#### Bài tap 13.1: Sensor Data Stream
-**Mô tiff:** Generator cho sensor data.
+#### Bài tập 13.1: Sensor Data Stream
+**Mô tả:** Generator cho sensor data.
 ```python
 def sensor_data_generator(interval, count):
     """
-    Generator mô phông sensor data
+    Generator mô phỏng sensor data
     """
     pass
 
@@ -362,8 +362,8 @@ for i, data in enumerate(sensor_data_generator(1, 5)):
 
 ### Day 14: Exception Handling Advanced
 
-#### Bài tap 14.1: Custom Exceptions
-**Mô tiff:** Tao custom exception.
+#### Bài tập 14.1: Custom Exceptions
+**Mô tả:** Tạo custom exception.
 ```python
 class MachineError(Exception):
     pass
@@ -389,12 +389,12 @@ except MachineOverloadError as e:
 
 ### Day 15: Production Scheduling
 
-#### Bài tap 15.1: Simple Scheduler
-**Mô tiff:** Lich trình sàn xuât.
+#### Bài tập 15.1: Simple Scheduler
+**Mô tả:** Lịch trình sản xuất.
 ```python
 def create_schedule(orders, machines):
     """
-    Phân công don dhang vào máy
+    Phân công đơn hàng vào máy
     orders: [{"id": 1, "time": 2, "priority": 1}]
     machines: ["A", "B", "C"]
     """
@@ -414,8 +414,8 @@ print(create_schedule(orders, ["A", "B"]))
 
 ### Day 16: Quality Control
 
-#### Bài tap 16.1: Quality Checker
-**Mô tiff:** Kiêm tra chât luông.
+#### Bài tập 16.1: Quality Checker
+**Mô tả:** Kiểm tra chất lượng.
 ```python
 def check_quality(measurements, specs):
     """
@@ -432,8 +432,8 @@ print(check_quality([10.1, 9.9, 10.2], {"min": 9.5, "max": 10.5}))
 
 ### Day 17: Inventory Management
 
-#### Bài tap 17.1: Stock Tracker
-**Mô tiff:** Quân lý tôn kho.
+#### Bài tập 17.1: Stock Tracker
+**Mô tả:** Quản lý tồn kho.
 ```python
 def update_inventory(inventory, transactions):
     """
@@ -450,8 +450,8 @@ print(update_inventory({"A": 100, "B": 50}, [{"item": "A", "qty": -10}]))
 
 ### Day 18: Data Analysis
 
-#### Bài tap 18.1: Production Analytics
-**Mô tiff:** Phân tích dã liêu sàn xuât.
+#### Bài tập 18.1: Production Analytics
+**Mô tả:** Phân tích dữ liệu sản xuất.
 ```python
 def analyze_production(production_data):
     """
@@ -473,8 +473,8 @@ print(analyze_production(data))
 
 ### Day 19: Real-time Monitoring
 
-#### Bài tap 19.1: Alert System
-**Mô tiff:** Hê thông canh bâo.
+#### Bài tập 19.1: Alert System
+**Mô tả:** Hệ thống cảnh báo.
 ```python
 def check_alerts(sensor_data, thresholds):
     """
@@ -492,12 +492,12 @@ print(check_alerts({"temperature": 85, "pressure": 150},
 
 ### Day 20: Report Generation
 
-#### Bài tap 20.1: Daily Report
-**Mô tiff:** Tao bâo cáo hàng ngày.
+#### Bài tập 20.1: Daily Report
+**Mô tả:** Tạo báo cáo hàng ngày.
 ```python
 def generate_daily_report(date, production, quality, downtime):
     """
-    Tao bâo cáo format HTML
+    Tạo báo cáo format HTML
     """
     pass
 
@@ -509,12 +509,12 @@ print(generate_daily_report("2026-04-15", 500, 95.5, 2.5))
 
 ### Day 21: Integration Challenge
 
-#### Bài tap 21.1: Mini MES System
-**Mô tiff:** Tich hop tat ca concepts.
+#### Bài tập 21.1: Mini MES System
+**Mô tả:** Tích hợp tất cả concepts.
 ```python
 class MiniMES:
     def __init__(self):
-        # Khôi tao hê thông
+        # Khởi tạo hệ thống
         pass
     
     def add_machine(self, machine):
@@ -522,11 +522,11 @@ class MiniMES:
         pass
     
     def start_production(self, product_id, quantity):
-        # Bât dâu sàn xuât
+        # Bắt đầu sản xuất
         pass
     
     def get_status(self):
-        # Lây traang thái hê thông
+        # Lấy trạng thái hệ thống
         pass
 
 # Test
@@ -543,16 +543,16 @@ print(mes.get_status())
 
 ### Day 22: JSON Handling
 
-#### Bài tap 22.1: Data Serialization
+#### Bài tập 22.1: Data Serialization
 ```python
 import json
 
 def serialize_machine(machine_obj):
-    """Chuyên object thành JSON"""
+    """Chuyển object thành JSON"""
     pass
 
 def deserialize_machine(json_str):
-    """Chuyên JSON thành object"""
+    """Chuyển JSON thành object"""
     pass
 
 # Test
@@ -565,10 +565,10 @@ print(json_str)  # Expected: JSON string
 
 ### Day 23: HTTP Basics
 
-#### Bài tap 23.1: API Request Simulator
+#### Bài tập 23.1: API Request Simulator
 ```python
 def simulate_api_request(endpoint, method, data=None):
-    """Mô phông API request"""
+    """Mô phỏng API request"""
     pass
 
 print(simulate_api_request("/machines", "GET"))
@@ -579,7 +579,7 @@ print(simulate_api_request("/machines", "POST", {"name": "A"}))
 
 ### Day 24: Type Hints
 
-#### Bài tap 24.1: Typed Functions
+#### Bài tập 24.1: Typed Functions
 ```python
 from typing import List, Dict, Optional
 
@@ -592,12 +592,12 @@ def process_machines(machines: List[Dict[str, any]]) -> Optional[Dict[str, any]]
 
 ### Day 25: Async Basics
 
-#### Bài tap 25.1: Async Operations
+#### Bài tập 25.1: Async Operations
 ```python
 import asyncio
 
 async def fetch_sensor_data():
-    """Mô phông async data fetch"""
+    """Mô phỏng async data fetch"""
     await asyncio.sleep(0.1)
     return {"temperature": 25.5}
 
@@ -613,7 +613,7 @@ asyncio.run(main())
 
 ### Day 26: Validation
 
-#### Bài tap 26.1: Data Validation
+#### Bài tập 26.1: Data Validation
 ```python
 def validate_machine_data(data):
     """Validate machine data"""
@@ -626,7 +626,7 @@ def validate_machine_data(data):
 
 ### Day 27: Testing
 
-#### Bài tap 27.1: Unit Tests
+#### Bài tập 27.1: Unit Tests
 ```python
 def test_machine_status():
     """Unit test cho machine status"""
@@ -643,7 +643,7 @@ print("All tests passed!")
 
 ### Day 28: Final Challenge
 
-#### Bài tap 28.1: MES API Simulator
+#### Bài tập 28.1: MES API Simulator
 ```python
 class MESAPISimulator:
     def __init__(self):
@@ -651,19 +651,19 @@ class MESAPISimulator:
         self.production_orders = []
     
     def create_machine(self, machine_data):
-        """Tao máy mõi"""
+        """Tạo máy mới"""
         pass
     
     def get_machine(self, machine_id):
-        """Lây thông tin máy"""
+        """Lấy thông tin máy"""
         pass
     
     def create_production_order(self, order_data):
-        """Tao don dhang sàn xuât"""
+        """Tạo đơn hàng sản xuất"""
         pass
     
     def get_dashboard_data(self):
-        """Lây dã liêu dashboard"""
+        """Lấy dữ liệu dashboard"""
         pass
 
 # Test
@@ -674,32 +674,32 @@ print(api.get_machine("M001"))
 
 ---
 
-## Tips Hoc Tp
+## Tips Học Tập
 
 ### 1. **Làm hàng ngày:**
 - Dành 30-60 phút/ngày
-- Không skip bài tap
-- Ghi chú các concepts mõi
+- Không skip bài tập
+- Ghi chú các concepts mới
 
-### 2. **Suy luân truoc khi code:**
-- Dê bài yêu câ gi?
-- Cân nhêu function?
+### 2. **Suy luận trước khi code:**
+- Đề bài yêu cầu gì?
+- Cần những function nào?
 - Edge cases nào?
 
-### 3. **Test kip thoa:**
-- Test vôi các cases khác nhau
-- Kiêm tra error handling
+### 3. **Test kịp thời:**
+- Test với các cases khác nhau
+- Kiểm tra error handling
 - Verify output
 
-### 4. **Refactor khi cân:**
+### 4. **Refactor khi cần:**
 - Code có clean không?
-- Có thê optimize không?
+- Có thể optimize không?
 - Có readable không?
 
 ### 5. **Build projects:**
-- Áp dung concepts vào project thuc
-- Tích hôn các bài tap
-- Tao portfolio
+- Áp dụng concepts vào project thực
+- Tích hợp các bài tập
+- Tạo portfolio
 
 ---
 
@@ -721,4 +721,4 @@ print(api.get_machine("M001"))
 
 ---
 
-**Lên lch:** 28 ngày mõi ngày 1 bài tap, build foundation solid cho FastAPI và MES development!
+**Lên lịch:** 28 ngày mỗi ngày 1 bài tập, build foundation solid cho FastAPI và MES development!
