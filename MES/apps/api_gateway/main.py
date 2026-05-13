@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
 
 # 1. Import cấu hình và hạ tầng từ core
@@ -7,7 +8,7 @@ from libs.core.http.exceptions import register_exception_handlers
 from libs.core.http.health_controller import router as health_router
 
 # 2. Import các module nghiệp vụ
-from libs.modules.users.router import router as users_router
+
 
 # 3. Khởi tạo App
 app = FastAPI(
@@ -22,7 +23,6 @@ register_exception_handlers(app)
 
 # 5. Đăng ký các Router
 app.include_router(health_router)
-app.include_router(users_router, prefix=f"{settings.API_PREFIX}/users")
 
 @app.get("/")
 def root():
