@@ -31,6 +31,20 @@ class RedisCache(BaseCache):
         except Exception as e:
             print(f"Redis SET Error: {e}")
 
+    async def acquire_lock(self, key: str, ttl: int = 5) -> bool:
+        """
+        Thử lấy một Distributed Lock bằng Redis SET NX.
+        Trả về True nếu giành được khóa, False nếu có người khác đã khóa.
+        """
+        try:
+            # nx=True chỉ lưu nếu key CHƯA tồn tại.
+            # ex=ttl tự động mở khóa sau X giây để tránh dead-lock nếu WMS bị sập.
+            result = await self.redis_client.set(key, "LOCKED", ex=ttl, nx=True)
+            return bool(result)
+        except Exception as e:
+            print(f"Redis LOCK Error: {e}")
+            return False
+
     async def delete(self, key: str) -> None:
         try:
             await self.redis_client.delete(key)

@@ -42,6 +42,12 @@ class CacheManager:
         # Bắn lên Redis
         await self.redis_cache.set(key, value, ttl)
 
+    async def acquire_lock(self, key: str, ttl: int = 5) -> bool:
+        """
+        Giao tiếp với Redis để lấy khóa phân tán (Distributed Lock).
+        """
+        return await self.redis_cache.acquire_lock(key, ttl)
+
     async def delete(self, key: str) -> None:
         """Xóa đồng thời ở cả 2 nơi"""
         self.local_cache.delete(key)
