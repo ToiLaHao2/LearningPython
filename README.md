@@ -1,41 +1,47 @@
 # Warehouse Management System Simulation - WMSS (MES Layer / Python)
 
-Dự án này là tầng **MES (Manufacturing Execution System)** - "Người điều phối" trong hệ thống mô phỏng tự động hóa nhà kho đa ngôn ngữ (Polyglot Microservices).
+Dự án này là tầng **MES (Manufacturing Execution System)** - "Bộ não Quyết định & Lập kế hoạch" trong hệ thống mô phỏng tự động hóa nhà kho đa ngôn ngữ (Polyglot Microservices).
 
 ## 🧩 Vai trò trong hệ thống
 
-MES đóng vai trò trung gian, chịu trách nhiệm về logic tính toán phức tạp và điều phối nhiệm vụ:
+Trong kiến trúc 3 tầng (Business → Decision → Execution), MES đảm nhận lớp **Decision Layer** — trả lời cho câu hỏi *"Làm như thế nào?"*:
 
-- **ERP / WMS (Node.js):** Đóng vai trò là "Bộ não chiến lược" - Quản lý logic hàng hóa và ra lệnh.
-- **MES (Python):** Đóng vai trò "Người điều phối" - Lập lịch, tìm đường (Pathfinding) và phân bổ tác vụ.
-- **AGV Control Service (Golang):** Đóng vai trò "Hệ cơ bắp" - Điều khiển và tính toán tọa độ di chuyển thực tế.
+- **ERP / WMS (Node.js):** Lớp Business — *"Cần làm gì?"* (Ra yêu cầu nghiệp vụ: nhập/xuất hàng).
+- **MES (Python):** Lớp Decision — *"Làm như thế nào?"* (Tính toán logic, định tuyến, phân bổ slot, tạo kế hoạch thực thi).
+- **AGV Control Service (Golang):** Lớp Execution — *"Thực thi ra sao?"* (Điều khiển AGV realtime dựa trên kế hoạch từ MES).
+
+> **Lưu ý quan trọng:** MES là một dịch vụ **Stateless Calculator**. Nó KHÔNG quản lý nghiệp vụ kho (Business), KHÔNG giám sát trạng thái realtime của AGV. Nó nhận yêu cầu, xử lý toán học/thuật toán phức tạp, tạo ra "Execution Plan" và giao xuống cho tầng Go.
+
+## 🚀 Các Chức Năng Cốt Lõi (Decision Engine)
+
+- **Slot Allocation:** Phân tích và quyết định item nên được cất vào vị trí (slot) nào để tối ưu hóa không gian và thời gian lấy/cất hàng.
+- ****Pathfinding (A*):**** Tính toán đường đi ngắn nhất, tối ưu nhất từ điểm A đến điểm B trên lưới (Grid) của nhà kho.
+- **Task Generation:** Biên dịch một yêu cầu nghiệp vụ (VD: "Nhập hàng") thành chuỗi các nhiệm vụ thực thi (VD: `MOVE_TO_PICKUP` → `MOVE_TO_STORAGE` → `CHARGE`).
+- **Traffic Planning:** Xử lý điều hướng giao thông, tránh va chạm (collision avoidance) khi có nhiều AGV cùng hoạt động.
 
 ## 🛠 Công nghệ sử dụng
 
-- **Python 3.10+**: Ngôn ngữ hiện đại, mạnh mẽ cho xử lý thuật toán và AI.
-- **FastAPI**: Framework hiệu suất cao, hỗ trợ tốt cho AsyncIO và gRPC.
-- **gRPC**: Giao tiếp nội bộ tốc độ cao với tầng Node.js (WMS).
-- **Kafka**: Hệ thống Event-stream để điều phối trạng thái AGV theo thời gian thực.
-- **Redis**: Caching bản đồ kho hàng (NavMesh) để tối ưu hóa tốc độ tìm đường.
+- **Python 3.10+**: Ngôn ngữ hiện đại, lý tưởng cho xử lý thuật toán, AI và Data.
+- **FastAPI**: Framework hiệu suất cao, hỗ trợ tốt AsyncIO.
+- **gRPC**: Cung cấp các API tính toán tốc độ cao (Sync) để WMS và Go gọi đến.
+- **Kafka**: Lắng nghe (Consume) các yêu cầu từ WMS một cách bất đồng bộ.
+- **Redis**: Truy xuất siêu tốc bản đồ kho (Grid layout) và cấu hình dùng chung.
 
-## 🚀 Các Module chính
+## 🔄 Luồng xử lý chính (Ví dụ: Nhập hàng)
 
-- `libs/modules/pathfinding`: Triển khai thuật toán **A* Pathfinding** để tính toán đường đi ngắn nhất cho AGV trên lưới NavMesh.
-- `apps/api_gateway`: Tầng giao tiếp (HTTP/gRPC) để tiếp nhận lệnh từ hệ thống WMS.
-
-## 🔄 Luồng xử lý chính
-
-1. Nhận yêu cầu di chuyển từ WMS (qua gRPC).
-2. Lấy dữ liệu Layout kho từ Redis.
-3. Tính toán lộ trình tối ưu bằng thuật toán A*.
-4. Gửi danh sách Waypoints cho tầng AGV Control (Go) để thực thi.
+1. **WMS** đẩy yêu cầu nhập hàng vào Kafka.
+2. **MES** (Consumer) nhận yêu cầu.
+3. **MES** chạy thuật toán **Slot Allocation** để tìm vị trí trống tối ưu.
+4. **MES** lấy bản đồ kho từ **Redis** và chạy **A* Pathfinding** để tìm đường đi.
+5. **MES** đóng gói kết quả thành một **Execution Plan** (bao gồm Slot, Waypoints, Tasks).
+6. **MES** gửi kế hoạch này xuống cho **AGV Control (Go)** qua gRPC để điều khiển Robot thực thi.
 
 ## 💻 Hướng dẫn phát triển
 
 ### 1. Thiết lập môi trường
 
 ```bash
-# Di chuyển vào thư mục MES
+g# Di chuyển vào thư mục MES
 cd MES
 
 # Tạo môi trường ảo
@@ -44,14 +50,19 @@ python -m venv .venv
 # Kích hoạt môi trường (Windows)
 .venv\Scripts\activate
 
+# Copy config env và điền thông tin biến môi trường
+cp .env.example .env
+
 # Cài đặt thư viện
 pip install -r requirements.txt
 ```
 
 ### 2. Chạy ứng dụng (Development mode)
 
+Sử dụng script chạy chuẩn của dự án (khởi động cả HTTP và gRPC Server):
+
 ```bash
-uvicorn apps.api_gateway.main:app --reload
+python run.py
 ```
 
 ## 🧠 Thuật toán A* (A-Star Pathfinding)
