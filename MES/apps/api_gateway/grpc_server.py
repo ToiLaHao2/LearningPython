@@ -2,7 +2,7 @@ import asyncio
 import grpc
 from libs.core.contracts import mes_pb2_grpc
 from libs.core.logger import logger
-from .grpc_handler import PathfindingHandler, SlotAllocationHandler
+from .grpc_handler import PathfindingHandler, SlotAllocationHandler, DispatchHandler
 
 async def serve_grpc():
     """Khởi chạy gRPC Server"""
@@ -14,6 +14,9 @@ async def serve_grpc():
     )
     mes_pb2_grpc.add_SlotAllocationServiceServicer_to_server(
         SlotAllocationHandler(), server
+    )
+    mes_pb2_grpc.add_DispatchServiceServicer_to_server(
+        DispatchHandler(), server
     )
 
     # Lắng nghe ở port 50051 (Port mặc định của gRPC)

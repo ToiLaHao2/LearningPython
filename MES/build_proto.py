@@ -25,4 +25,4 @@ content = content.replace(
 with open(grpc_file, "w", encoding="utf-8") as f:
     f.write(content)
 
-print("✅ Proto compiled and import path fixed!")
+print("[OK] Proto compiled and import path fixed!")

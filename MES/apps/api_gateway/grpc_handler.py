@@ -3,6 +3,7 @@ from libs.core.contracts import mes_pb2, mes_pb2_grpc
 from libs.core.logger import logger
 from libs.modules.pathfinding.service import PathfindingService
 from libs.modules.slot_allocation.service import SlotAllocationService
+from libs.modules.task_manager.service import DispatchService
 
 
 class PathfindingHandler(mes_pb2_grpc.PathfindingServiceServicer):
@@ -75,3 +76,51 @@ class SlotAllocationHandler(mes_pb2_grpc.SlotAllocationServiceServicer):
                 message=str(e),
                 error_code="INTERNAL_ERROR"
             )
+
+
+class DispatchHandler(mes_pb2_grpc.DispatchServiceServicer):
+    def __init__(self):
+        self.dispatch_service = DispatchService()
+
+    async def DispatchAGV(self, request, context):
+        """
+        Nhận thông tin từ WMS, tạo Execution Plan đầy đủ cho AGV.
+        """
+        warehouse_id = request.warehouse_id
+        agv_pos = (request.agv_position.x, request.agv_position.y)
+        pickup = (request.pickup_point.x, request.pickup_point.y)
+        slot_pos = (request.slot_position.x, request.slot_position.y)
+
+        logger.info(f"gRPC Request: DispatchAGV cho kho {warehouse_id}")
+
+        try:
+            plan = await self.dispatch_service.create_execution_plan(
+                warehouse_id, agv_pos, pickup, slot_pos
+            )
+
+            if not plan["success"]:
+                return mes_pb2.DispatchResponse(success=False, message=plan["message"])
+
+            # Map hành động từ string sang enum proto
+            action_map = {
+                "MOVE": mes_pb2.ActionType.MOVE,
+                "PICK_UP": mes_pb2.ActionType.PICK_UP,
+                "DROP_OFF": mes_pb2.ActionType.DROP_OFF,
+            }
+
+            waypoints = [
+                mes_pb2.WaypointAction(
+                    position=mes_pb2.Point(x=wp["x"], y=wp["y"]),
+                    action=action_map.get(wp["action"], mes_pb2.ActionType.MOVE)
+                )
+                for wp in plan["waypoints"]
+            ]
+
+            return mes_pb2.DispatchResponse(
+                success=True,
+                message=plan["message"],
+                waypoints=waypoints
+            )
+        except Exception as e:
+            logger.error(f"Loi gRPC DispatchAGV: {str(e)}")
+            return mes_pb2.DispatchResponse(success=False, message=str(e))
